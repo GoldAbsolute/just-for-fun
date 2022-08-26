@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/gorilla/mux"
+	"net/http"
 	"os"
 )
 
@@ -13,8 +15,8 @@ func check(err error) {
 	}
 }
 
-var APP_PASSWORD = os.Getenv("app_password")
 var APP_LOGIN = os.Getenv("app_login")
+var APP_PASSWORD = os.Getenv("app_password")
 var APP_IP = os.Getenv("app_ip")
 var APP_PORT = os.Getenv("app_port")
 var APP_DBNAME = os.Getenv("app_dbname")
@@ -27,4 +29,12 @@ func main() {
 	check(err)
 	check(db.Ping())
 	fmt.Println("DataBase ping is OK")
+
+	router := mux.NewRouter()
+	router.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
+		_, err := fmt.Fprintf(writer, db_path)
+		check(err)
+	})
+	errHttp := http.ListenAndServe(":80", router)
+	check(errHttp)
 }
