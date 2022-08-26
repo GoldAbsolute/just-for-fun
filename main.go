@@ -32,7 +32,7 @@ func main() {
 
 	router := mux.NewRouter()
 	router.HandleFunc("/", func(writer http.ResponseWriter, request *http.Request) {
-		_, err := fmt.Fprintf(writer, db_path)
+		_, err := fmt.Fprintf(writer, "string: %s", db_path)
 		check(err)
 	})
 	errHttp := http.ListenAndServe(":80", router)
