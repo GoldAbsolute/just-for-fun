@@ -1,0 +1,35 @@
+version: '3'
+services:
+
+  #Ping Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    #restart: unless-stopped
+    #tty: true
+    ports:
+      - "80:80"
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+      app_login: example-user
+      app_password: your_mysql_root_password
+      app_ip: db
+      app_port: 3306
+      app_dbname: laravel
+
+  #MySQL Service
+  db:
+    image: mysql:5.7.22
+    container_name: db
+    restart: unless-stopped
+    #tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: your_mysql_root_password
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
