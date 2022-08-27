@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../for heroku/app/.idea/fashion.iml" filepath="$PROJECT_DIR$/../../for heroku/app/.idea/fashion.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/just-for-fun.iml" filepath="$PROJECT_DIR$/.idea/just-for-fun.iml" />
     </modules>
   </component>
